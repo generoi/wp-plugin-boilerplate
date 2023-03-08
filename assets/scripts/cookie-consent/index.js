@@ -32,6 +32,23 @@ function runEvent(modal) {
   modal.dispatchEvent(event);
 }
 
+export function googleConsentMode(type = 'default') {
+  window.dataLayer = window.dataLayer || [];
+
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+
+  const consents = parseConsentString(
+    getCookie(COOKIE_NAME)
+  );
+
+  gtag('consent', type, {
+    'analytics_storage': consents.length ? (consents[1] === '1' ? 'granted' : 'denied') : 'denied',
+    'ad_storage': consents.length ? (consents[2] === '1' ? 'granted' : 'denied') : 'denied',
+  });
+}
+
 export default function init(modal) {
   const hash = modal.attributes['data-cookie-consent-hash'].value;
   const acceptSelectedEl = modal.querySelector('[data-cookie-consent-accept-selected]');
@@ -84,6 +101,7 @@ export default function init(modal) {
     setCookie(COOKIE_NAME, consentString);
     setCookie(COOKIE_NAME + '-hash', hash);
     runEvent(modal);
+    googleConsentMode('update');
     modal.hide();
   });
 
@@ -96,6 +114,7 @@ export default function init(modal) {
     setCookie(COOKIE_NAME, consentString);
     setCookie(COOKIE_NAME + '-hash', hash);
     runEvent(modal);
+    googleConsentMode('update');
     modal.hide();
   });
 }

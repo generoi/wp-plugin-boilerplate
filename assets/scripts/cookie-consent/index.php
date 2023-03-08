@@ -1,9 +1,27 @@
 <?php
 
-add_action('wp_body_open', function () {
+add_action('wp_head', function () {
 
     // if no tag manager id is set, do nothing
     if (!$gtm_id = get_option('cmp_gtm_id', '')) {
+        return;
+    }
+
+    ?>
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+            'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','<?= $gtm_id ?>');</script>
+    <!-- End Google Tag Manager -->
+    <?php
+});
+
+add_action('wp_body_open', function () {
+
+    // if no tag manager id is set, do nothing
+    if (!get_option('cmp_gtm_id', '')) {
         return;
     }
 
@@ -47,16 +65,16 @@ add_action('wp_body_open', function () {
         aria-descibedby="cc-description"
         persistent
         scroll-lock
-        data-cookie-consent-hash="'. $hash .'"
-        data-configs="'.$configs.'"
+        data-cookie-consent-hash="' . $hash . '"
+        data-configs="' . $configs . '"
         >
-        <h2 id="cc-heading">'. __('Cookie Preferences', 'gds') .'</h2>
+        <h2 id="cc-heading">' . __('Cookie Preferences', 'gds') . '</h2>
         <p id="cc-description">
-        '. __('We use cookies to provide a better user experience and personalised service. By consenting to the use of cookies, we can develop an even better service and will be able to provide content that is interesting to you. You are in control of your cookie preferences, and you may change them at any time. Read more about our cookies.') .'
+        ' . __('We use cookies to provide a better user experience and personalised service. By consenting to the use of cookies, we can develop an even better service and will be able to provide content that is interesting to you. You are in control of your cookie preferences, and you may change them at any time. Read more about our cookies.') . '
         </p>
     ';
 
-    if (count($settings['consents'])>0) {
+    if (count($settings['consents']) > 0) {
         $body .= '
         <div id="cookie-settings" class="cookie-consent__cookies">
 
@@ -66,12 +84,12 @@ add_action('wp_body_open', function () {
             $body .= '
             <gds-accordion-item>
                 <label slot="label">
-                    <input type="checkbox" name="cookie-consent" '. (($consent['necessary']) ? 'required' : '') .' '. ((@$consent['consent']) ? 'checked disabled' : '') . ' value="'. $consent['id'] .'">
-                    '. $consent['label'] .'
+                    <input type="checkbox" name="cookie-consent" ' . (($consent['necessary']) ? 'required' : '') . ' ' . ((@$consent['consent']) ? 'checked disabled' : '') . ' value="' . $consent['id'] . '">
+                    ' . $consent['label'] . '
                 </label>
                 <i slot="icon" class="fa fa-solid fa-chevron-down"></i>
 
-                <p>'. $consent['description'] .'</p>
+                <p>' . $consent['description'] . '</p>
             </gds-accordion-item>
             ';
         }
@@ -86,7 +104,7 @@ add_action('wp_body_open', function () {
             <button
             data-cookie-consent-accept-selected
             class="wp-block-button__link"
-            >'.__('Accept selected cookies') .'</toggle-button>
+            >' . __('Accept selected cookies') . '</toggle-button>
         </div>
 
         <div class="wp-block-button is-style-outline">
@@ -94,14 +112,14 @@ add_action('wp_body_open', function () {
             persistent
             aria-controls="cookie-settings accept-selected-button"
             class="wp-block-button__link"
-            >'. __('Edit cookie settings') .'</toggle-button>
+            >' . __('Edit cookie settings') . '</toggle-button>
         </div>
 
         <div class="wp-block-button">
             <button
             data-cookie-consent-accept-all
             class="wp-block-button__link"
-            >'. __('Accept all cookies') .'</button>
+            >' . __('Accept all cookies') . '</button>
         </div>
         </div>
     </modal-dialog>';
@@ -112,14 +130,6 @@ add_action('wp_body_open', function () {
 		window.dataLayer = window.dataLayer || []
 		// window.dataLayer = dataLayer
 		;(function() {
-		function loadGTM() {
-			console.log('loadGTM exec');
-			(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-			new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-			j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-			'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-			})(window,document,'script','dataLayer','".$gtm_id."');
-		}
 		var consentManager = document.querySelector('.cookie-consent')
 		if (consentManager) {
 			// TCF v2 API present, now check if CMP is loaded
@@ -127,10 +137,8 @@ add_action('wp_body_open', function () {
                 console.log(event)
 				// Push consent data to dataLayer for easy access in GTM.
 				window.dataLayer.push({
-					consentSetting: event.detail.setting,
+					consentSetting: event.detail.settings,
 				})
-				// Now that we have all requred consent ready, we can finally load GTM.
-				loadGTM()
 			})
 		}
 		})()
