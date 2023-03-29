@@ -309,13 +309,13 @@ class Admin
         );
 
         add_settings_field(
-            $this->settings_title . '_incl_user_red_date',
+            $this->settings_title . '_incl_user_reg_date',
             __('Logged in user creation date', $this->text_domain),
             [$this, 'renderCheckbox'],
             $this->settings_title,
             $this->settings_title . '_data_visitors',
             [
-                'key' => 'incl_user_red_date',
+                'key' => 'incl_user_reg_date',
                 'label' => __('Include the date of creation (registration) of the logged in user.', $this->text_domain),
             ]
         );
