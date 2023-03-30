@@ -33,6 +33,7 @@ class Plugin
 
         new Admin($this->name);
         new Frontend($this->name);
+        new Plugins($this->name);
     }
 
     /**

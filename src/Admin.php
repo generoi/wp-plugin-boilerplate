@@ -350,6 +350,25 @@ class Admin
                 'label' => __('Include an event when an existing user has been logged in on the frontend of your site (admin events not included).', $this->text_domain),
             ]
         );
+
+        add_settings_section(
+            $this->settings_title . '_plugins',
+            __('Plugins', $this->text_domain),
+            '__return_false',
+            $this->settings_title
+        );
+
+        add_settings_field(
+            $this->settings_title . '_plugin_ctx_feed_facebook_pixel_off',
+            __('CTX Feed - Fb Pixel OFF', $this->text_domain),
+            [$this, 'renderCheckbox'],
+            $this->settings_title,
+            $this->settings_title . '_plugins',
+            [
+                'key' => 'plugin_ctx_feed_facebook_pixel_off',
+                'label' => __('Check to remove Facebook Pixel code added by CTX Feed plugin.', $this->text_domain),
+            ]
+        );
     }
 
     public function renderText($args)
@@ -429,6 +448,7 @@ class Admin
             'incl_user_reg_date' => 1,
             'event_new_user_reg' => 1,
             'event_user_logged_in' => 1,
+            'plugin_ctx_feed_facebook_pixel_off' => 0,
         ];
     }
 
