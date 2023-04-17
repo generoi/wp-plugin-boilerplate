@@ -23,13 +23,25 @@ function buildConsentString(values, revisedVersion = 1) {
 }
 
 function runEvent(modal) {
-  let event = new CustomEvent('accept', {
+  const settings = JSON.parse(modal.attributes['data-configs'].value);
+  const cookieConsents = parseConsentString(
+    getCookie(COOKIE_NAME)
+  );
+
+  let consents = {};
+
+  settings.consents.forEach((item, index) => {
+    consents[item.id] = cookieConsents[index];
+  });
+
+  let event = new CustomEvent('genero-cmp-accept', {
     detail: {
       message: 'Cookies have been accepted',
-      settings: JSON.parse(modal.attributes['data-configs'].value)
+      settings: settings,
+      consents: consents,
     }
   });
-  modal.dispatchEvent(event);
+  window.dispatchEvent(event);
 }
 
 export function googleConsentMode(type = 'default') {

@@ -456,17 +456,15 @@ class Frontend
                 window.dataLayer = window.dataLayer || []
                 // window.dataLayer = dataLayer
                 ;(function() {
-                var consentManager = document.querySelector('.cookie-consent')
-                if (consentManager) {
                     // TCF v2 API present, now check if CMP is loaded
-                    consentManager.addEventListener('accept', function(event) {
+                    window.addEventListener('genero-cmp-accept', function(event) {
                         console.log(event)
                         // Push consent data to dataLayer for easy access in GTM.
                         window.dataLayer.push({
-                            consentSetting: event.detail.settings,
+                            generoCmpSettings: event.detail.settings,
+                            generoCmpConsents: event.detail.consents,
                         })
                     })
-                }
                 })()
             </script>
             <!-- Consent Manager by genero-cmp -->

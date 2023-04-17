@@ -15,6 +15,7 @@ gds-cmp-modal-dialog {
     max-height: 90vh;
     max-height: 90dvh;
     overflow: auto;
+    margin: 0 16px;
   }
 
   &::part(overlay) {

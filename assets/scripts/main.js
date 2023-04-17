@@ -16,5 +16,8 @@ window.PluginComponent = new PluginComponent();
 googleConsentMode();
 
 document.addEventListener('DOMContentLoaded', () => {
-  cookieConsent(document.querySelector('.cookie-consent'));
+  let cookieConsentContainer = document.querySelector('.cookie-consent');
+  if(cookieConsentContainer) {
+    cookieConsent(document.querySelector('.cookie-consent'));
+  }
 });
