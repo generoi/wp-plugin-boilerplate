@@ -8,6 +8,8 @@ Author:             Genero
 Author URI:         http://genero.fi/
 License:            MIT License
 License URI:        http://opensource.org/licenses/MIT
+Text Domain:        genero-cmp
+Domain Path:        /languages
 */
 
 use GeneroWP\GeneroCmp\Plugin;

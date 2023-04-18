@@ -361,21 +361,21 @@ class Frontend
         $settings['consents'] = [
             [
                 'id' => 'consent-necessary',
-                'label' => __('Necessary', 'wp-gds-cmp'),
-                'description' => __('These cookies are technically required for our core website to work properly, e.g. security functions or your cookie consent preferences.', 'wp-gds-cmp'),
+                'label' => __('Necessary', 'genero-cmp'),
+                'description' => __('These cookies are technically required for our core website to work properly, e.g. security functions or your cookie consent preferences.', 'genero-cmp'),
                 'necessary' => true,
                 'consent' => true,
             ],
             [
                 'id' => 'consent-statistics',
-                'label' => __('Statistics', 'wp-gds-cmp'),
-                'description' => __('In order to improve our website going forward, we anonymously collect data for statistical and analytical purposes. With these cookies we can, for instance, monitor the number or duration of visits of specific pages of our website helping us in optimizing user experience.', 'wp-gds-cmp'),
+                'label' => __('Statistics', 'genero-cmp'),
+                'description' => __('In order to improve our website going forward, we anonymously collect data for statistical and analytical purposes. With these cookies we can, for instance, monitor the number or duration of visits of specific pages of our website helping us in optimizing user experience.', 'genero-cmp'),
                 'necessary' => false,
             ],
             [
                 'id' => 'consent-marketing',
-                'label' => __('Marketing', 'wp-gds-cmp'),
-                'description' => __('These cookies help us in measuring and optimizing our marketing efforts.', 'wp-gds-cmp'),
+                'label' => __('Marketing', 'genero-cmp'),
+                'description' => __('These cookies help us in measuring and optimizing our marketing efforts.', 'genero-cmp'),
                 'necessary' => false,
             ],
         ];
@@ -394,9 +394,9 @@ class Frontend
                 data-cookie-consent-hash="' . $hash . '"
                 data-configs="' . $configs . '"
                 >
-                <h2 id="cc-heading">' . __('Cookie Preferences', 'gds') . '</h2>
+                <h2 id="cc-heading">' . __('Cookie Preferences', 'genero-cmp') . '</h2>
                 <p id="cc-description">
-                ' . __('We use cookies to provide a better user experience and personalised service. By consenting to the use of cookies, we can develop an even better service and will be able to provide content that is interesting to you. You are in control of your cookie preferences, and you may change them at any time. Read more about our cookies.') . '
+                ' . __('We use cookies to provide a better user experience and personalised service. By consenting to the use of cookies, we can develop an even better service and will be able to provide content that is interesting to you. You are in control of your cookie preferences, and you may change them at any time. Read more about our cookies.', 'genero-cmp') . '
                 </p>
             ';
 
@@ -430,7 +430,7 @@ class Frontend
                 <button
                 data-cookie-consent-accept-selected
                 class="wp-block-button__link"
-                >' . __('Accept selected cookies') . '</toggle-button>
+                >' . __('Accept selected cookies', 'genero-cmp') . '</toggle-button>
             </div>
 
             <div class="wp-block-button is-style-outline">
@@ -438,14 +438,14 @@ class Frontend
                 persistent
                 aria-controls="cookie-settings accept-selected-button"
                 class="wp-block-button__link"
-                >' . __('Edit cookie settings') . '</gds-cmp-toggle-button>
+                >' . __('Edit cookie settings', 'genero-cmp') . '</gds-cmp-toggle-button>
             </div>
 
             <div class="wp-block-button">
                 <button
                 data-cookie-consent-accept-all
                 class="wp-block-button__link"
-                >' . __('Accept all cookies') . '</button>
+                >' . __('Accept all cookies', 'genero-cmp') . '</button>
             </div>
             </div>
         </gds-cmp-modal-dialog>';
